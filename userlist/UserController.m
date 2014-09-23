@@ -24,6 +24,7 @@
             [usersArray addObject:user];
         }
         [subscriber sendNext:[usersArray copy]];
+        [subscriber sendCompleted];
         return nil;
     }];
 }
