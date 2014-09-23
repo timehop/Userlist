@@ -42,6 +42,10 @@
 
     self.title = NSLocalizedString(@"Random Users", nil);
 
+    UIBarButtonItem *clearImageCacheBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Clear Cache", nil) style:UIBarButtonItemStylePlain target:nil action:nil];
+    clearImageCacheBarButtonItem.rac_command = self.viewModel.clearImageCacheCommand;
+    self.navigationItem.rightBarButtonItem = clearImageCacheBarButtonItem;
+
     self.refreshControl = [[UIRefreshControl alloc] init];
     [[[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
         mapReplace:self.viewModel.userViewModelsCommand]

@@ -45,6 +45,10 @@
 
         RAC(self, loading) =
             [_userViewModelsCommand executing];
+
+        _clearImageCacheCommand = [[RACCommand alloc] initWithEnabled:[RACObserve(self, loading) not] signalBlock:^RACSignal *(id _) {
+            return [imageController purgeLocalCaches];
+        }];
     }
     return self;
 }

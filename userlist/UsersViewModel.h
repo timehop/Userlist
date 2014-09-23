@@ -17,6 +17,9 @@
 /// Input: nil
 @property (nonatomic, readonly) RACCommand *userViewModelsCommand;
 
+/// Input: nil
+@property (nonatomic, readonly) RACCommand *clearImageCacheCommand;
+
 @property (nonatomic, readonly, getter=isLoading) BOOL loading;
 
 @end
