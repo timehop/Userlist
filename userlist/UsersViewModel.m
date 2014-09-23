@@ -39,8 +39,9 @@
         }];
 
         RAC(self, userViewModels) =
-            [[_userViewModelsCommand executionSignals]
-                switchToLatest];
+            [[[_userViewModelsCommand executionSignals]
+                switchToLatest]
+                deliverOn:[RACScheduler mainThreadScheduler]];
 
         RAC(self, loading) =
             [_userViewModelsCommand executing];

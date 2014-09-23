@@ -45,8 +45,10 @@
 
         // Bind avatarImage to the latest output of
         RAC(self, avatarImage) =
-            [[_loadAvatarImageCommand executionSignals]
-                switchToLatest];
+            [[[[_loadAvatarImageCommand executionSignals]
+                switchToLatest]
+                deliverOn:[RACScheduler mainThreadScheduler]]
+                startWith:[UIImage imageNamed:@"user_avatar_placeholder"]];
 
         // Trigger image load when the view model becomes active
         [[self didBecomeActiveSignal]
