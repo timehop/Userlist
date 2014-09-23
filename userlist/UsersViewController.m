@@ -35,6 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.tableView.rowHeight = 48;
     [self.tableView registerClass:[UserCell class] forCellReuseIdentifier:NSStringFromClass([UserCell class])];
 
     @weakify(self);
