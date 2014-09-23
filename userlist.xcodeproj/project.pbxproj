@@ -15,6 +15,10 @@
 		83CF45EF19D0EF9B00D5F355 /* userlistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45EE19D0EF9B00D5F355 /* userlistTests.m */; };
 		83CF45FA19D0F22400D5F355 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45F919D0F22400D5F355 /* User.m */; };
 		83CF45FE19D0F37B00D5F355 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45FD19D0F37B00D5F355 /* UserController.m */; };
+		83CF460119D0F69100D5F355 /* UsersViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF460019D0F69100D5F355 /* UsersViewModel.m */; };
+		83CF460419D0F98100D5F355 /* UserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF460319D0F98100D5F355 /* UserViewModel.m */; };
+		83CF460719D0FB1E00D5F355 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF460619D0FB1E00D5F355 /* ImageController.m */; };
+		83CF460A19D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF460919D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,14 @@
 		83CF45FB19D0F25500D5F355 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		83CF45FC19D0F37B00D5F355 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
 		83CF45FD19D0F37B00D5F355 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
+		83CF45FF19D0F69100D5F355 /* UsersViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersViewModel.h; sourceTree = "<group>"; };
+		83CF460019D0F69100D5F355 /* UsersViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersViewModel.m; sourceTree = "<group>"; };
+		83CF460219D0F98100D5F355 /* UserViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewModel.h; sourceTree = "<group>"; };
+		83CF460319D0F98100D5F355 /* UserViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewModel.m; sourceTree = "<group>"; };
+		83CF460519D0FB1E00D5F355 /* ImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageController.h; sourceTree = "<group>"; };
+		83CF460619D0FB1E00D5F355 /* ImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
+		83CF460819D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageManager+RACSignalSupport.h"; sourceTree = "<group>"; };
+		83CF460919D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+RACSignalSupport.m"; sourceTree = "<group>"; };
 		B3B01B686D7449BCA003571D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,10 +111,10 @@
 			children = (
 				83CF45D619D0EF9B00D5F355 /* AppDelegate.h */,
 				83CF45D719D0EF9B00D5F355 /* AppDelegate.m */,
-				83CF45FC19D0F37B00D5F355 /* UserController.h */,
-				83CF45FD19D0F37B00D5F355 /* UserController.m */,
-				83CF45F819D0F22400D5F355 /* User.h */,
-				83CF45F919D0F22400D5F355 /* User.m */,
+				83CF460E19D0FDB000D5F355 /* View Model */,
+				83CF460B19D0FD9200D5F355 /* Controller */,
+				83CF460C19D0FD9D00D5F355 /* RACSignal Support */,
+				83CF460D19D0FDA700D5F355 /* Model */,
 				83CF45DF19D0EF9B00D5F355 /* Images.xcassets */,
 				83CF45E119D0EF9B00D5F355 /* LaunchScreen.xib */,
 				83CF45D219D0EF9B00D5F355 /* Supporting Files */,
@@ -135,6 +147,46 @@
 				83CF45ED19D0EF9B00D5F355 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83CF460B19D0FD9200D5F355 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83CF45FC19D0F37B00D5F355 /* UserController.h */,
+				83CF45FD19D0F37B00D5F355 /* UserController.m */,
+				83CF460519D0FB1E00D5F355 /* ImageController.h */,
+				83CF460619D0FB1E00D5F355 /* ImageController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		83CF460C19D0FD9D00D5F355 /* RACSignal Support */ = {
+			isa = PBXGroup;
+			children = (
+				83CF460819D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.h */,
+				83CF460919D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.m */,
+			);
+			name = "RACSignal Support";
+			sourceTree = "<group>";
+		};
+		83CF460D19D0FDA700D5F355 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83CF45F819D0F22400D5F355 /* User.h */,
+				83CF45F919D0F22400D5F355 /* User.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		83CF460E19D0FDB000D5F355 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				83CF45FF19D0F69100D5F355 /* UsersViewModel.h */,
+				83CF460019D0F69100D5F355 /* UsersViewModel.m */,
+				83CF460219D0F98100D5F355 /* UserViewModel.h */,
+				83CF460319D0F98100D5F355 /* UserViewModel.m */,
+			);
+			name = "View Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,9 +324,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				83CF45D819D0EF9B00D5F355 /* AppDelegate.m in Sources */,
+				83CF460119D0F69100D5F355 /* UsersViewModel.m in Sources */,
+				83CF460719D0FB1E00D5F355 /* ImageController.m in Sources */,
 				83CF45D519D0EF9B00D5F355 /* main.m in Sources */,
 				83CF45FE19D0F37B00D5F355 /* UserController.m in Sources */,
 				83CF45FA19D0F22400D5F355 /* User.m in Sources */,
+				83CF460A19D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.m in Sources */,
+				83CF460419D0F98100D5F355 /* UserViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
