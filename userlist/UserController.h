@@ -10,7 +10,6 @@
 @interface UserController : NSObject
 
 /// Sends an array of fabricated User objects then completes.
-/// Sends on a background thread.
 - (RACSignal *)fetchUsers:(NSUInteger)numberOfUsers;
 
 @end
