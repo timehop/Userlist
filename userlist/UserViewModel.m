@@ -40,7 +40,7 @@
 
         _loadAvatarImageCommand = [[RACCommand alloc] initWithEnabled:hasAvatarImageSignal signalBlock:^RACSignal *(id _) {
             @strongify(self);
-            return [imageController imageAndProgressWithURL:self.user.avatarURL];
+            return [imageController imageWithURL:self.user.avatarURL];
         }];
 
         // Bind avatarImage to the latest output of
