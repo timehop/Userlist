@@ -19,7 +19,7 @@
         NSMutableArray *usersArray = [NSMutableArray array];
         for (int i = 0; i < numberOfUsers; i++) {
             NSString *name = [LoremIpsum name];
-            NSURL *avatarURL = [LoremIpsum URLForPlaceholderImageWithSize:CGSizeMake(100, 100)];
+            NSURL *avatarURL = [[LoremIpsum URLForPlaceholderImageFromService:LIPlaceholderImageServiceLoremPixel withSize:CGSizeMake(100, 100)] URLByAppendingPathComponent:[NSString stringWithFormat:@"people/%i/%i", (i%10), i]];
             User *user = [[User alloc] initWithName:name avatarURL:avatarURL];
             [usersArray addObject:user];
         }
