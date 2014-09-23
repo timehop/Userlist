@@ -96,6 +96,8 @@
 # pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UserViewModel *userViewModel = self.viewModel.userViewModels[indexPath.row];
+    NSLog(@"Selected: %@", userViewModel);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
