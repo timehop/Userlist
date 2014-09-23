@@ -28,13 +28,12 @@
 
         _userViewModelsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id _) {
             return [[userController fetchUsers:100]
-                        flattenMap:^RACSignal *(NSArray *users) {
-                            return [[[[users rac_sequence]
-                                        signal]
+                        map:^NSArray *(NSArray *users) {
+                            return [[[users rac_sequence]
                                         map:^UserViewModel *(User *user) {
                                             return [[UserViewModel alloc] initWithUser:user imageController:imageController];
                                         }]
-                                        collect];
+                                        array];
                         }];
         }];
 
