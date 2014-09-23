@@ -42,6 +42,25 @@
 
     self.title = NSLocalizedString(@"Random Users", nil);
 
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [[[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
+        mapReplace:self.viewModel.userViewModelsCommand]
+        subscribeNext:^(RACCommand *userViewModelsCommand) {
+            [userViewModelsCommand execute:nil];
+        }];
+
+    [RACObserve(self.viewModel, loading)
+        subscribeNext:^(NSNumber *loading) {
+            @strongify(self);
+            if ([loading boolValue]) {
+                [self.refreshControl beginRefreshing];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            } else {
+                [self.refreshControl endRefreshing];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }
+        }];
+
     [[RACObserve(self.viewModel, userViewModels)
         ignore:nil]
         subscribeNext:^(id _) {
