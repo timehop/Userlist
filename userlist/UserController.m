@@ -14,7 +14,7 @@
 
 @implementation UserController
 
-- (RACSignal *)fetchUsers:(NSUInteger)numberOfUsers {
+- (RACSignal *)fetchRandomUsers:(NSUInteger)numberOfUsers {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         NSMutableArray *usersArray = [NSMutableArray array];
         for (int i = 0; i < numberOfUsers; i++) {

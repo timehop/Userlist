@@ -10,6 +10,6 @@
 @interface UserController : NSObject
 
 /// Sends an array of fabricated User objects then completes.
-- (RACSignal *)fetchUsers:(NSUInteger)numberOfUsers;
+- (RACSignal *)fetchRandomUsers:(NSUInteger)numberOfUsers;
 
 @end

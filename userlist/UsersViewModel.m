@@ -27,7 +27,7 @@
         ImageController *imageController = [ImageController sharedController];
 
         _userViewModelsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id _) {
-            return [[[userController fetchUsers:100]
+            return [[[userController fetchRandomUsers:100]
                         subscribeOn:[RACScheduler scheduler]]
                         map:^NSArray *(NSArray *users) {
                             return [[[users rac_sequence]
