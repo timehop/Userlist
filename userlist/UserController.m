@@ -15,7 +15,7 @@
 @implementation UserController
 
 - (RACSignal *)fetchUsers:(NSUInteger)numberOfUsers {
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         NSMutableArray *usersArray = [NSMutableArray array];
         for (int i = 0; i < numberOfUsers; i++) {
             NSString *name = [LoremIpsum name];
@@ -25,7 +25,8 @@
         }
         [subscriber sendNext:[usersArray copy]];
         return nil;
-    }];
+    }]
+    subscribeOn:[RACScheduler scheduler]]; // Do heavy lifting on a background thread
 }
 
 @end
