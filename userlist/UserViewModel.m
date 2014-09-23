@@ -43,7 +43,7 @@
             return [imageController imageWithURL:self.user.avatarURL];
         }];
 
-        // Bind avatarImage to the latest output of
+        // Bind avatarImage to the latest output of command
         RAC(self, avatarImage) =
             [[[[_loadAvatarImageCommand executionSignals]
                 switchToLatest]
