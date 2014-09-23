@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 
+#import "UsersViewController.h"
+
+#import "UsersViewModel.h"
+
 @interface AppDelegate ()
 
 @end
@@ -16,8 +20,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    UsersViewModel *usersViewModel = [[UsersViewModel alloc] init];
+    UsersViewController *usersViewController = [[UsersViewController alloc] initWithViewModel:usersViewModel];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:usersViewController];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }
