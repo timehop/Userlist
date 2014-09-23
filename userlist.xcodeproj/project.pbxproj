@@ -14,6 +14,7 @@
 		83CF45E319D0EF9B00D5F355 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CF45E119D0EF9B00D5F355 /* LaunchScreen.xib */; };
 		83CF45EF19D0EF9B00D5F355 /* userlistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45EE19D0EF9B00D5F355 /* userlistTests.m */; };
 		83CF45FA19D0F22400D5F355 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45F919D0F22400D5F355 /* User.m */; };
+		83CF45FE19D0F37B00D5F355 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45FD19D0F37B00D5F355 /* UserController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 		83CF45F819D0F22400D5F355 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		83CF45F919D0F22400D5F355 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		83CF45FB19D0F25500D5F355 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		83CF45FC19D0F37B00D5F355 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
+		83CF45FD19D0F37B00D5F355 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		B3B01B686D7449BCA003571D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +99,8 @@
 			children = (
 				83CF45D619D0EF9B00D5F355 /* AppDelegate.h */,
 				83CF45D719D0EF9B00D5F355 /* AppDelegate.m */,
+				83CF45FC19D0F37B00D5F355 /* UserController.h */,
+				83CF45FD19D0F37B00D5F355 /* UserController.m */,
 				83CF45F819D0F22400D5F355 /* User.h */,
 				83CF45F919D0F22400D5F355 /* User.m */,
 				83CF45DF19D0EF9B00D5F355 /* Images.xcassets */,
@@ -268,6 +273,7 @@
 			files = (
 				83CF45D819D0EF9B00D5F355 /* AppDelegate.m in Sources */,
 				83CF45D519D0EF9B00D5F355 /* main.m in Sources */,
+				83CF45FE19D0F37B00D5F355 /* UserController.m in Sources */,
 				83CF45FA19D0F22400D5F355 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
