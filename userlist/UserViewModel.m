@@ -17,7 +17,8 @@
 @interface UserViewModel ()
 
 @property (nonatomic, readonly) RACCommand *loadAvatarImageCommand;
-@property (nonatomic, readonly) RACDisposable *loadAvatarImageDisposable;
+
+@property (nonatomic, readonly) UIImage *networkAvatarImage;
 
 @end
 
@@ -32,23 +33,30 @@
 
         // Don't bother loading the image if there's already one stored.
         RACSignal *hasAvatarImageSignal =
-            [RACObserve(self, avatarImage) map:^id(UIImage *image) {
-                return (image != nil) ? @YES : @NO;
-            }];
+            [RACObserve(self, networkAvatarImage)
+                map:^id(UIImage *image) {
+                    return (image != nil) ? @YES : @NO;
+                }];
 
         @weakify(self);
 
-        _loadAvatarImageCommand = [[RACCommand alloc] initWithEnabled:hasAvatarImageSignal signalBlock:^RACSignal *(id _) {
+        _loadAvatarImageCommand = [[RACCommand alloc] initWithEnabled:[hasAvatarImageSignal not] signalBlock:^RACSignal *(id _) {
             @strongify(self);
             return [imageController imageWithURL:self.user.avatarURL];
         }];
 
-        // Bind avatarImage to the latest output of command
-        RAC(self, avatarImage) =
-            [[[[_loadAvatarImageCommand executionSignals]
+        // Bind networkAvatarImage to the latest output of command
+        RAC(self, networkAvatarImage) =
+            [[[_loadAvatarImageCommand executionSignals]
                 switchToLatest]
-                deliverOn:[RACScheduler mainThreadScheduler]]
-                startWith:[UIImage imageNamed:@"user_avatar_placeholder"]];
+                distinctUntilChanged];
+
+        // avatarImage starts as a placeholder image, then is replaced by network image as it becomes available
+        RAC(self, avatarImage) =
+            [[[RACObserve(self, networkAvatarImage)
+                ignore:nil]
+                startWith:[UIImage imageNamed:@"user_avatar_placeholder"]]
+                deliverOn:[RACScheduler mainThreadScheduler]];
 
         // Trigger image load when the view model becomes active
         [[self didBecomeActiveSignal]
