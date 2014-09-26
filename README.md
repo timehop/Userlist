@@ -8,9 +8,9 @@ For more information, please see the [issue](https://github.com/ReactiveCocoa/Re
 
 Userlist uses Cocoapods to fetch a handful of dependencies.
 
-  $ git clone https://github.com/timehop/Userlist.git
-  $ cd Userlist
-  $ pod install
+    $ git clone https://github.com/timehop/Userlist.git
+    $ cd Userlist
+    $ pod install
 
 ## Contributing
 
