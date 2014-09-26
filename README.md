@@ -2,7 +2,7 @@
 
 Userlist is an example MVVM and ReactiveCocoa iOS project. Its goal is to facilitate discussion on performance.
 
-For more information, please see the [issue](https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1497) on the ReactiveCocoa Github page.
+For more information, please see the [issue](https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1503) on the ReactiveCocoa Github page.
 
 ## Getting Started
 
