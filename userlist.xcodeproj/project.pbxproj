@@ -465,10 +465,12 @@
 			baseConfigurationReference = B3B01B686D7449BCA003571D /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREFIX_HEADER = userlist/PrefixHeader.pch;
 				INFOPLIST_FILE = userlist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -477,10 +479,14 @@
 			baseConfigurationReference = B3B01B686D7449BCA003571D /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREFIX_HEADER = userlist/PrefixHeader.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = userlist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
