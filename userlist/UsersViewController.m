@@ -90,6 +90,7 @@
 
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UserCell class]) forIndexPath:indexPath];
     cell.viewModel = viewModel;
+    cell.viewModel.active = YES;
     return cell;
 }
 
@@ -102,8 +103,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    UserCell *userCell = (UserCell *)cell;
-    userCell.viewModel.active = YES;
+
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
