@@ -16,9 +16,7 @@
 
 @interface UserViewModel ()
 
-@property (nonatomic, readonly) RACCommand *loadAvatarImageCommand;
-
-@property (nonatomic, readonly) UIImage *networkAvatarImage;
+@property (nonatomic) UIImage *avatarImage;
 
 @end
 
@@ -31,37 +29,22 @@
 
         _name = _user.name;
 
-        // Don't bother loading the image if there's already one stored.
-        RACSignal *hasAvatarImageSignal =
-            [RACObserve(self, networkAvatarImage)
-                map:^id(UIImage *image) {
-                    return (image != nil) ? @YES : @NO;
-                }];
+        _avatarImage = [UIImage imageNamed:@"user_avatar_placeholder"];
 
         @weakify(self);
 
-        _loadAvatarImageCommand = [[RACCommand alloc] initWithEnabled:[hasAvatarImageSignal not] signalBlock:^RACSignal *(id _) {
-            @strongify(self);
-            return [imageController imageWithURL:self.user.avatarURL];
-        }];
-
-        // Bind networkAvatarImage to the latest output of command
-        RAC(self, networkAvatarImage) =
-            [[[_loadAvatarImageCommand executionSignals]
-                switchToLatest]
-                distinctUntilChanged];
-
-        // avatarImage starts as a placeholder image, then is replaced by network image as it becomes available
-        RAC(self, avatarImage) =
-            [[[RACObserve(self, networkAvatarImage)
-                ignore:nil]
-                startWith:[UIImage imageNamed:@"user_avatar_placeholder"]]
-                deliverOn:[RACScheduler mainThreadScheduler]];
-
-        // Trigger image load when the view model becomes active
-        [[self didBecomeActiveSignal]
-            subscribeNext:^(UserViewModel *userViewModel) {
-                [userViewModel.loadAvatarImageCommand execute:nil];
+        // Trigger image load when the view model becomes active.
+        // Currently ignoring load errors.
+        [[[[[[self didBecomeActiveSignal]
+            take:1]
+            flattenMap:^RACSignal *(UserViewModel *userViewModel) {
+                return [imageController imageWithURL:userViewModel.user.avatarURL];
+            }]
+            ignore:nil]
+            deliverOn:[RACScheduler mainThreadScheduler]]
+            subscribeNext:^(UIImage *image) {
+                @strongify(self);
+                self.avatarImage = image;
             }];
 
     }
