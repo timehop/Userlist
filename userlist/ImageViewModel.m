@@ -99,6 +99,7 @@
         [[self didBecomeInactiveSignal]
             subscribeNext:^(ImageViewModel *viewModel) {
                 [viewModel.imageDisposable dispose];
+                viewModel.imageDisposable = nil;
             }];
 
         // It's probably too heavy to create a new signal for every one of these view models
