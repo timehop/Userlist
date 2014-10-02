@@ -34,6 +34,8 @@
         _openImageURLBlock = openImageURLBlock ?: ^(id _){};
         _imageController = imageController;
 
+        _progress = 1.0;
+
         RAC(self, hasError) =
             [RACObserve(self, error)
                 map:^NSNumber *(NSError *error) {
