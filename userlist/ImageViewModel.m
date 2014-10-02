@@ -51,9 +51,9 @@
         @weakify(self);
 
         void (^fetchImageBlock)(void) = ^{
+            @strongify(self);
             if (self.imageDisposable != nil) return;
 
-            @strongify(self);
             self.imageDisposable =
                 [[[self.imageController imageAndProgressWithURL:self.imageURL]
                     initially:^{
