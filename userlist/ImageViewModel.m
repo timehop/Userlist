@@ -15,6 +15,7 @@
 @interface ImageViewModel ()
 
 @property (nonatomic, readonly) ImageController *imageController;
+@property (nonatomic, readonly) void (^openImageURLBlock)(NSURL *);
 
 @property (nonatomic) UIImage *image;
 @property (nonatomic) CGFloat progress;
@@ -30,6 +31,7 @@
     self = [super init];
     if (self != nil) {
         _imageURL = imageURL;
+        _openImageURLBlock = openImageURLBlock ?: ^(id _){};
         _imageController = imageController;
 
         RAC(self, hasError) =
@@ -81,7 +83,7 @@
             @strongify(self);
             if (self.image == nil) return;
             
-            [self hasError] ? fetchImageBlock() : openImageURLBlock(self.imageURL);
+            [self hasError] ? fetchImageBlock() : self.openImageURLBlock(self.imageURL);
         };
 
         [[self didBecomeActiveSignal]

@@ -5,6 +5,8 @@
 
 #import "UserViewModel.h"
 
+#import "ImageViewModel.h"
+
 #import "User.h"
 
 #import "ImageController.h"
@@ -13,12 +15,6 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 
 #pragma mark -
-
-@interface UserViewModel ()
-
-@property (nonatomic) UIImage *avatarImage;
-
-@end
 
 @implementation UserViewModel
 
@@ -29,30 +25,17 @@
 
         _name = _user.name;
 
-        _avatarImage = [UIImage imageNamed:@"user_avatar_placeholder"];
+        _imageViewModel = [[ImageViewModel alloc] initWithImageURL:_user.avatarURL openImageURLBlock:nil imageController:imageController];
 
-        @weakify(self);
-
-        // Trigger image load when the view model becomes active.
-        // Currently ignoring load errors.
-        [[[[[[self didBecomeActiveSignal]
-            take:1]
-            flattenMap:^RACSignal *(UserViewModel *userViewModel) {
-                return [imageController imageWithURL:userViewModel.user.avatarURL];
-            }]
-            ignore:nil]
-            deliverOn:[RACScheduler mainThreadScheduler]]
-            subscribeNext:^(UIImage *image) {
-                @strongify(self);
-                self.avatarImage = image;
-            }];
+        // Is this heavy?
+        RAC(self.imageViewModel, active) = RACObserve(self, active);
 
     }
     return self;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ | %@ | %@", self.user.name, self.user.avatarURL, self.avatarImage];
+    return [NSString stringWithFormat:@"%@ | %@ | %@", self.user.name, self.user.avatarURL, self.imageViewModel.image];
 }
 
 @end

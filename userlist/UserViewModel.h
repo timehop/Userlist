@@ -6,6 +6,7 @@
 #import <ReactiveViewModel/ReactiveViewModel.h>
 
 @class User;
+@class ImageViewModel;
 @class ImageController;
 
 #pragma mark -
@@ -15,7 +16,7 @@
 @property (nonatomic, readonly) User *user;
 
 @property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) UIImage *avatarImage;
+@property (nonatomic, readonly) ImageViewModel *imageViewModel;
 
 - (instancetype)initWithUser:(User *)user imageController:(ImageController *)imageController;
 
