@@ -1,0 +1,32 @@
+//
+//  userlist
+//  Copyright (c) 2014 TwoCentStudios. All rights reserved.
+//
+
+#import <ReactiveViewModel/ReactiveViewModel.h>
+
+@class ImageController;
+
+#pragma mark -
+
+@interface ImageViewModel : RVMViewModel
+
+/// The view model's "model".
+@property (nonatomic, readonly) NSURL *imageURL;
+
+@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) CGFloat progress; // 0..0.99 when loading, 1.0 otherwise
+@property (nonatomic, readonly) NSError *error;
+
+@property (nonatomic, readonly) BOOL hasError;
+@property (nonatomic, readonly, getter=isLoading) BOOL loading;
+
+/// Executing this block:
+/// * Refetches the image if there was an error.
+/// * Executes the openImageURLBlock passed in at initialization if the image is loaded.
+/// * Does nothing if the image is unset.
+@property (nonatomic, readonly) void (^selectImageBlock)(void);
+
+- (instancetype)initWithImageURL:(NSURL *)imageURL openImageURLBlock:(void (^)(NSURL *))openImageURLBlock imageController:(ImageController *)imageController;
+
+@end

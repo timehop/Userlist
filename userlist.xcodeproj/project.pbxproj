@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6BD5865081614C4E849BCDFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4218B6D5FE5B4C5DA373F0F6 /* libPods.a */; };
+		838AECCB19DCE53500C8E41E /* ImageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AECCA19DCE53500C8E41E /* ImageViewModel.m */; };
+		838AECCE19DCF3AD00C8E41E /* ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 838AECCD19DCF3AD00C8E41E /* ImageView.m */; };
 		83CF45D519D0EF9B00D5F355 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45D419D0EF9B00D5F355 /* main.m */; };
 		83CF45D819D0EF9B00D5F355 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF45D719D0EF9B00D5F355 /* AppDelegate.m */; };
 		83CF45E019D0EF9B00D5F355 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CF45DF19D0EF9B00D5F355 /* Images.xcassets */; };
@@ -35,6 +37,10 @@
 
 /* Begin PBXFileReference section */
 		4218B6D5FE5B4C5DA373F0F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		838AECC919DCE53500C8E41E /* ImageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewModel.h; sourceTree = "<group>"; };
+		838AECCA19DCE53500C8E41E /* ImageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewModel.m; sourceTree = "<group>"; };
+		838AECCC19DCF3AD00C8E41E /* ImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageView.h; sourceTree = "<group>"; };
+		838AECCD19DCF3AD00C8E41E /* ImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageView.m; sourceTree = "<group>"; };
 		83CF45CF19D0EF9A00D5F355 /* userlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = userlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83CF45D319D0EF9B00D5F355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83CF45D419D0EF9B00D5F355 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -192,6 +198,8 @@
 				83CF460019D0F69100D5F355 /* UsersViewModel.m */,
 				83CF460219D0F98100D5F355 /* UserViewModel.h */,
 				83CF460319D0F98100D5F355 /* UserViewModel.m */,
+				838AECC919DCE53500C8E41E /* ImageViewModel.h */,
+				838AECCA19DCE53500C8E41E /* ImageViewModel.m */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -203,6 +211,8 @@
 				83CF461019D1149400D5F355 /* UsersViewController.m */,
 				83CF461319D115A100D5F355 /* UserCell.h */,
 				83CF461419D115A100D5F355 /* UserCell.m */,
+				838AECCC19DCF3AD00C8E41E /* ImageView.h */,
+				838AECCD19DCF3AD00C8E41E /* ImageView.m */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -345,12 +355,14 @@
 				83CF45D819D0EF9B00D5F355 /* AppDelegate.m in Sources */,
 				83CF460119D0F69100D5F355 /* UsersViewModel.m in Sources */,
 				83CF460719D0FB1E00D5F355 /* ImageController.m in Sources */,
+				838AECCE19DCF3AD00C8E41E /* ImageView.m in Sources */,
 				83CF45D519D0EF9B00D5F355 /* main.m in Sources */,
 				83CF45FE19D0F37B00D5F355 /* UserController.m in Sources */,
 				83CF45FA19D0F22400D5F355 /* User.m in Sources */,
 				83CF460A19D0FB9F00D5F355 /* SDWebImageManager+RACSignalSupport.m in Sources */,
 				83CF461519D115A100D5F355 /* UserCell.m in Sources */,
 				83CF460419D0F98100D5F355 /* UserViewModel.m in Sources */,
+				838AECCB19DCE53500C8E41E /* ImageViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

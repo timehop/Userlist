@@ -1,0 +1,110 @@
+//
+//  userlist
+//  Copyright (c) 2014 TwoCentStudios. All rights reserved.
+//
+
+#import "ImageViewModel.h"
+
+#import "ImageController.h"
+
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
+
+#pragma mark -
+
+@interface ImageViewModel ()
+
+@property (nonatomic, readonly) ImageController *imageController;
+
+@property (nonatomic) UIImage *image;
+@property (nonatomic) CGFloat progress;
+@property (nonatomic) NSError *error;
+
+@property (nonatomic) RACDisposable *imageDisposable;
+
+@end
+
+@implementation ImageViewModel
+
+- (instancetype)initWithImageURL:(NSURL *)imageURL openImageURLBlock:(void (^)(NSURL *))openImageURLBlock imageController:(ImageController *)imageController {
+    self = [super init];
+    if (self != nil) {
+        _imageURL = imageURL;
+        _imageController = imageController;
+
+        RAC(self, hasError) =
+            [RACObserve(self, error)
+                map:^NSNumber *(NSError *error) {
+                    return @(error != nil);
+                }];
+
+        RAC(self, loading) =
+            [RACObserve(self, progress)
+                map:^NSNumber *(NSNumber *progress) {
+                    return ([progress floatValue] == 1.0) ? @NO : @YES;
+                }];
+
+        @weakify(self);
+
+        void (^fetchImageBlock)(void) = ^{
+            if (self.imageDisposable != nil) return;
+
+            @strongify(self);
+            self.imageDisposable =
+                [[[self.imageController imageAndProgressWithURL:self.imageURL]
+                    initially:^{
+                        @strongify(self);
+                        self.progress = 0;
+                        self.image = nil;
+                        self.error = nil;
+                    }]
+                    subscribeNext:^(RACTuple *t) {
+                        @strongify(self);
+                        RACTupleUnpack(UIImage *image, NSNumber *progress) = t;
+                        self.progress = [progress floatValue];
+                        if (self.progress == 1.0) {
+                            self.image = image;
+                        }
+                    } error:^(NSError *error) {
+                        @strongify(self);
+                        self.image = nil;
+                        self.progress = 1;
+                        self.error = error;
+                    } completed:^{
+                        @strongify(self);
+                        self.error = nil;
+                        self.progress = 1;
+                    }];
+        };
+
+        _selectImageBlock = ^{
+            @strongify(self);
+            if (self.image == nil) return;
+            
+            [self hasError] ? fetchImageBlock() : openImageURLBlock(self.imageURL);
+        };
+
+        [[self didBecomeActiveSignal]
+            subscribeNext:^(ImageViewModel *viewModel) {
+                if (viewModel.image == nil) {
+                    fetchImageBlock();
+                }
+            }];
+
+        [[self didBecomeInactiveSignal]
+            subscribeNext:^(ImageViewModel *viewModel) {
+                [viewModel.imageDisposable dispose];
+            }];
+
+        // It's probably too heavy to create a new signal for every one of these view models
+        // [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIApplicationDidReceiveMemoryWarningNotification object:nil]
+        //    subscribeNext:^(id _) {
+        //        @strongify(self);
+        //        self.image = nil;
+        //    }];
+
+    }
+    return self;
+}
+
+@end
