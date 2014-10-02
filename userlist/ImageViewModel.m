@@ -55,7 +55,8 @@
             if (self.imageDisposable != nil) return;
 
             self.imageDisposable =
-                [[[self.imageController imageAndProgressWithURL:self.imageURL]
+                [[[[self.imageController imageAndProgressWithURL:self.imageURL]
+                    deliverOn:[RACScheduler mainThreadScheduler]]
                     initially:^{
                         @strongify(self);
                         self.progress = 0;
