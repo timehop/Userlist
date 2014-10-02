@@ -31,6 +31,7 @@
         _progressLayer.fillColor = [UIColor clearColor].CGColor;
         _progressLayer.strokeColor = [UIColor blueColor].CGColor;
         _progressLayer.lineWidth = 3;
+        _progressLayer.actions = @{ @"strokeEnd": [NSNull null] };
         [self.layer addSublayer:_progressLayer];
 
         RAC(self, image) = RACObserve(self, viewModel.image);
@@ -40,17 +41,14 @@
     return self;
 }
 
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-
-    CGFloat const radius = CGRectGetWidth(bounds) * 0.8;
-    self.progressLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-}
-
 #pragma mark UIView
 
 - (void)layoutSubviews {
-    self.progressLayer.frame = self.bounds;
+    CGFloat const scale = 0.7;
+    CGFloat const side = CGRectGetWidth(self.bounds) * scale;
+    CGFloat const radius = side * 0.5;
+    self.progressLayer.frame = CGRectMake(CGRectGetMidX(self.bounds)-radius, CGRectGetMidY(self.bounds)-radius, side, side);
+    self.progressLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, side, side) cornerRadius:radius].CGPath;
 }
 
 @end
