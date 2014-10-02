@@ -34,8 +34,8 @@
         [self.layer addSublayer:_progressLayer];
 
         RAC(self, image) = RACObserve(self, viewModel.image);
-        RAC(self.progressLayer, strokeEnd) = RACObserve(self, viewModel.progress);
-        RAC(self.progressLayer, hidden) = [RACObserve(self, viewModel.loading) not];
+        RAC(self.progressLayer, strokeEnd) = [RACObserve(self, viewModel.progress) ignore:nil];
+        RAC(self.progressLayer, hidden) = [[RACObserve(self, viewModel.loading) ignore:nil] not];
     }
     return self;
 }
