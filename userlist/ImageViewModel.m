@@ -96,11 +96,13 @@
                 }
             }];
 
-        [[self didBecomeInactiveSignal]
-            subscribeNext:^(ImageViewModel *viewModel) {
-                [viewModel.imageDisposable dispose];
-                viewModel.imageDisposable = nil;
-            }];
+        // Disposing the image fetching signal has some overhead. It's also slightly different functionally than the previous
+        // versions, so leaving it out for this run.
+        //[[self didBecomeInactiveSignal]
+        //    subscribeNext:^(ImageViewModel *viewModel) {
+        //        [viewModel.imageDisposable dispose];
+        //        viewModel.imageDisposable = nil;
+        //    }];
 
         // It's probably too heavy to create a new signal for every one of these view models
         // [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIApplicationDidReceiveMemoryWarningNotification object:nil]
