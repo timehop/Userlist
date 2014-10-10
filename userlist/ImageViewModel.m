@@ -22,6 +22,9 @@
 @property (nonatomic) CGFloat progress;
 @property (nonatomic) NSError *error;
 
+@property (nonatomic) BOOL hasError;
+@property (nonatomic, getter=isLoading) BOOL loading;
+
 @property (nonatomic) RACDisposable *imageDisposable;
 
 @end
@@ -36,18 +39,7 @@
         _imageController = imageController;
 
         _progress = 1.0;
-
-        RAC(self, hasError) =
-            [RACObserve(self, error)
-                map:^NSNumber *(NSError *error) {
-                    return @(error != nil);
-                }];
-
-        RAC(self, loading) =
-            [RACObserve(self, progress)
-                map:^NSNumber *(NSNumber *progress) {
-                    return ([progress floatValue] == 1.0) ? @NO : @YES;
-                }];
+        _loading = NO;
 
         @weakify(self);
 
@@ -114,8 +106,70 @@
 
     _active = active;
 
-    if (self.image == nil) {
-        self.fetchImageBlock();
+    if (active) {
+        if (self.image == nil) {
+            self.fetchImageBlock();
+        }
+    } else {
+        self.setImageBlock = nil;
+        self.setProgressBlock = nil;
+        self.setErrorBlock = nil;
+        self.setHasErrorBlock = nil;
+        self.setLoadingBlock = nil;
+    }
+}
+
+- (void)setImage:(UIImage *)image {
+    if (_image == image) return;
+
+    _image = image;
+
+    if (self.setImageBlock != nil) {
+        self.setImageBlock(_image);
+    }
+}
+
+- (void)setProgress:(CGFloat)progress {
+    if (_progress == progress) return;
+
+    _progress = progress;
+
+    self.loading = (_progress == 1.0) ? NO : YES;
+
+    if (self.setProgressBlock != nil) {
+        self.setProgressBlock(_progress);
+    }
+}
+
+- (void)setError:(NSError *)error {
+    if (_error == error) return;
+
+    _error = error;
+
+    self.hasError = (_error != nil);
+
+    if (self.setErrorBlock != nil) {
+        self.setErrorBlock(_error);
+    }
+}
+
+- (void)setHasError:(BOOL)hasError {
+    if (_hasError == hasError) return;
+
+    _hasError = hasError;
+
+    if (self.setHasErrorBlock != nil) {
+        self.setHasErrorBlock(_hasError);
+    }
+}
+
+- (void)setLoading:(BOOL)loading {
+    if (_loading == loading) return;
+
+    _loading = loading;
+
+    if (self.setLoadingBlock != nil) {
+        self.setLoadingBlock(_loading);
     }
 }
 

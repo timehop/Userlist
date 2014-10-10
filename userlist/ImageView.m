@@ -8,6 +8,7 @@
 #import "ImageViewModel.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 
 #pragma mark -
 
@@ -33,12 +34,35 @@
         _progressLayer.lineWidth = 3;
         _progressLayer.actions = @{ @"strokeEnd": [NSNull null] };
         [self.layer addSublayer:_progressLayer];
-
-        RAC(self, image) = RACObserve(self, viewModel.image);
-        RAC(self.progressLayer, strokeEnd) = [RACObserve(self, viewModel.progress) ignore:nil];
-        RAC(self.progressLayer, hidden) = [[RACObserve(self, viewModel.loading) ignore:nil] not];
     }
     return self;
+}
+
+- (void)setViewModel:(ImageViewModel *)viewModel {
+    if (_viewModel == viewModel) return;
+
+    _viewModel = viewModel;
+
+    @weakify(self);
+
+    self.image = _viewModel.image;
+    self.progressLayer.strokeEnd = _viewModel.progress;
+    self.progressLayer.hidden = !_viewModel.loading;
+
+    _viewModel.setImageBlock = ^(UIImage *image) {
+        @strongify(self);
+        self.image = image;
+    };
+
+    _viewModel.setProgressBlock = ^(CGFloat progress) {
+        @strongify(self);
+        self.progressLayer.strokeEnd = progress;
+    };
+
+    _viewModel.setLoadingBlock = ^(BOOL loading) {
+        @strongify(self);
+        self.progressLayer.hidden = !loading;
+    };
 }
 
 #pragma mark UIView
