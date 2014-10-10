@@ -16,6 +16,7 @@
 
 @property (nonatomic, readonly) ImageController *imageController;
 @property (nonatomic, readonly) void (^openImageURLBlock)(NSURL *);
+@property (nonatomic, readonly) void (^fetchImageBlock)(void);
 
 @property (nonatomic) UIImage *image;
 @property (nonatomic) CGFloat progress;
@@ -50,7 +51,7 @@
 
         @weakify(self);
 
-        void (^fetchImageBlock)(void) = ^{
+        _fetchImageBlock = ^{
             @strongify(self);
             if (self.imageDisposable != nil) return;
 
@@ -86,15 +87,8 @@
             @strongify(self);
             if (self.image == nil) return;
             
-            [self hasError] ? fetchImageBlock() : self.openImageURLBlock(self.imageURL);
+            [self hasError] ? self.fetchImageBlock() : self.openImageURLBlock(self.imageURL);
         };
-
-        [[self didBecomeActiveSignal]
-            subscribeNext:^(ImageViewModel *viewModel) {
-                if (viewModel.image == nil) {
-                    fetchImageBlock();
-                }
-            }];
 
         // Disposing the image fetching signal has some overhead. It's also slightly different functionally than the previous
         // versions, so leaving it out for this run.
@@ -113,6 +107,16 @@
 
     }
     return self;
+}
+
+- (void)setActive:(BOOL)active {
+    if (_active == active) return;
+
+    _active = active;
+
+    if (self.image == nil) {
+        self.fetchImageBlock();
+    }
 }
 
 @end

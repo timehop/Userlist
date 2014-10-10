@@ -26,12 +26,16 @@
         _name = _user.name;
 
         _imageViewModel = [[ImageViewModel alloc] initWithImageURL:_user.avatarURL openImageURLBlock:nil imageController:imageController];
-
-        // Is this heavy?
-        RAC(self.imageViewModel, active) = RACObserve(self, active);
-
     }
     return self;
+}
+
+- (void)setActive:(BOOL)active {
+    if (_active == active) return;
+
+    _active = active;
+
+    self.imageViewModel.active = _active;
 }
 
 - (NSString *)description {
