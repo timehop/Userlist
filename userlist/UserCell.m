@@ -27,11 +27,17 @@
     if (self != nil) {
         _avatarImageView = [[ImageView alloc] init];
         [self.contentView addSubview:_avatarImageView];
-
-        RAC(self.avatarImageView, viewModel) = RACObserve(self, viewModel.imageViewModel);
-        RAC(self.textLabel, text) = [RACObserve(self, viewModel.name) ignore:nil];
     }
     return self;
+}
+
+- (void)setViewModel:(UserViewModel *)viewModel {
+    if (_viewModel == viewModel) return;
+
+    _viewModel = viewModel;
+
+    self.avatarImageView.viewModel = _viewModel.imageViewModel;
+    self.textLabel.text = _viewModel.name;
 }
 
 - (void)layoutSubviews {
