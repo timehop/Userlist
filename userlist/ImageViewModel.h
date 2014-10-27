@@ -26,12 +26,6 @@
 /// * Does nothing if the image is unset.
 @property (nonatomic, readonly) void (^selectImageBlock)(void);
 
-@property (nonatomic, copy) void (^setImageBlock)(UIImage *);
-@property (nonatomic, copy) void (^setProgressBlock)(CGFloat);
-@property (nonatomic, copy) void (^setErrorBlock)(NSError *);
-@property (nonatomic, copy) void (^setHasErrorBlock)(BOOL);
-@property (nonatomic, copy) void (^setLoadingBlock)(BOOL);
-
 - (instancetype)initWithImageURL:(NSURL *)imageURL openImageURLBlock:(void (^)(NSURL *))openImageURLBlock imageController:(ImageController *)imageController;
 
 @end
