@@ -1,4 +1,5 @@
 PODS:
+  - KVOController (1.0.3)
   - LoremIpsum (1.0.0)
   - ReactiveCocoa (2.3.1):
     - ReactiveCocoa/UI
@@ -14,12 +15,14 @@ PODS:
   - SDWebImage/Core (3.7.1)
 
 DEPENDENCIES:
+  - KVOController (= 1.0.3)
   - LoremIpsum (= 1.0.0)
   - ReactiveCocoa (= 2.3.1)
   - ReactiveViewModel (= 0.2)
   - SDWebImage (= 3.7.1)
 
 SPEC CHECKSUMS:
+  KVOController: b1139ef1fc373b6757e4b69493fedd7b56eb1272
   LoremIpsum: a4d378ecaffcb08c7e40cdba3fb935dc41b2272c
   ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
   ReactiveViewModel: 78387196df2e7535bb2776c41df15dbb17300f8a

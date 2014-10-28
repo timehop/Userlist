@@ -7,13 +7,15 @@
 
 #import "ImageViewModel.h"
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTKeyPathCoding.h>
+#import <KVOController/FBKVOController.h>
 
 #pragma mark -
 
 @interface ImageView ()
 
 @property (nonatomic, readonly) CAShapeLayer *progressLayer;
+@property (nonatomic, readonly) FBKVOController *kvoController;
 
 @end
 
@@ -34,9 +36,25 @@
         _progressLayer.actions = @{ @"strokeEnd": [NSNull null] };
         [self.layer addSublayer:_progressLayer];
 
-        RAC(self, image) = RACObserve(self, viewModel.image);
-        RAC(self.progressLayer, strokeEnd) = [RACObserve(self, viewModel.progress) ignore:nil];
-        RAC(self.progressLayer, hidden) = [[RACObserve(self, viewModel.loading) ignore:nil] not];
+        _kvoController = [[FBKVOController alloc] initWithObserver:self retainObserved:NO];
+
+        [_kvoController observe:self keyPath:@"viewModel.image" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew block:^(id observer, id object, NSDictionary *change) {
+            UIImage *image = nil;
+            if ([change[NSKeyValueChangeNewKey] isKindOfClass:[UIImage class]]) {
+                image = change[NSKeyValueChangeNewKey];
+            }
+            self.image = image;
+        }];
+
+        [_kvoController observe:self keyPath:@"viewModel.progress" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew block:^(id observer, id object, NSDictionary *change) {
+            if (![change[NSKeyValueChangeNewKey] isKindOfClass:[NSNumber class]]) return;
+            self.progressLayer.strokeEnd = [change[NSKeyValueChangeNewKey] floatValue];
+        }];
+
+        [_kvoController observe:self keyPath:@"viewModel.loading" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew block:^(id observer, id object, NSDictionary *change) {
+            if (![change[NSKeyValueChangeNewKey] isKindOfClass:[NSNumber class]]) return;
+            self.progressLayer.hidden = ![change[NSKeyValueChangeNewKey] boolValue];
+        }];
     }
     return self;
 }
